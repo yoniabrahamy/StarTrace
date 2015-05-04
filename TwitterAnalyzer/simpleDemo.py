@@ -147,7 +147,7 @@ def getSVMFeatureVector(testTweets, featureList):
 #end
 
 #Read the tweets one by one and process it
-inpTweets = csv.reader(open('data/medium_size_dataset.csv', 'rb'), delimiter=',', quotechar='"')
+inpTweets = csv.reader(open('data/sampleTweets.csv', 'rb'), delimiter=',', quotechar='"')
 stopWords = getStopWordList('data/feature_list/stopwords.txt')
 count = 0;
 featureList = []
@@ -172,35 +172,35 @@ NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
 
 
 #Train the SVM classifier
-result = getSVMFeatureVectorAndLabels(tweets, featureList)
-problem = svm_problem(result['labels'], result['feature_vector'])
+#result = getSVMFeatureVectorAndLabels(tweets, featureList)
+#problem = svm_problem(result['labels'], result['feature_vector'])
 #'-q' option suppress console output
-param = svm_parameter('-q')
-param.kernel_type = LINEAR
-classifier = svm_train(problem, param)
-svm_save_model('TestClassifer', classifier)
+#param = svm_parameter('-q')
+#param.kernel_type = LINEAR
+#classifier = svm_train(problem, param)
+#svm_save_model('TestClassifer', classifier)
 
 
 #Test the svm classifier
 
-testTweet = 'The sun is shining brightly, such a wonderful day!'
-shittyTweet = 'My mouth really hurts. It makes me feel sad'
-processedTestTweet = processTweet(testTweet)
-processedShitTestTweet = processTweet(shittyTweet)
+#testTweet = 'The sun is shining brightly, such a wonderful day!'
+#shittyTweet = 'My mouth really hurts. It makes me feel sad'
+#processedTestTweet = processTweet(testTweet)
+#processedShitTestTweet = processTweet(shittyTweet)
 
-print processedTestTweet
-print processedShitTestTweet
+#print processedTestTweet
+#print processedShitTestTweet
 
-test_feature_vector = getSVMFeatureVector(processedTestTweet, featureList)
-bad_test_feature_vector = getSVMFeatureVector(processedShitTestTweet, featureList)
+#test_feature_vector = getSVMFeatureVector(processedTestTweet, featureList)
+#bad_test_feature_vector = getSVMFeatureVector(processedShitTestTweet, featureList)
 
 #p_labels contains the final labeling result
-p_labels, p_accs, p_vals = svm_predict([0] * len(test_feature_vector),test_feature_vector, classifier)
-p2_labels, p2_accs, p2_vals = svm_predict([0] * len(bad_test_feature_vector),bad_test_feature_vector, classifier)
+#p_labels, p_accs, p_vals = svm_predict([0] * len(test_feature_vector),test_feature_vector, classifier)
+#p2_labels, p2_accs, p2_vals = svm_predict([0] * len(bad_test_feature_vector),bad_test_feature_vector, classifier)
 
-print "Acording to svm test:"
-print "Good Tweet: %s, sentiment=%s\n" % (testTweet, p_labels);
-print "Bad Tweet: %s, sentiment=%s\n" % (shittyTweet, p2_labels);
+#print "Acording to svm test:"
+#print "Good Tweet: %s, sentiment=%s\n" % (testTweet, p_labels);
+#print "Bad Tweet: %s, sentiment=%s\n" % (shittyTweet, p2_labels);
 
 # Test the naive bayes classifier
 testTweet = 'Wow so much love, perfect and delight'
