@@ -7,10 +7,12 @@ import os
 import pickle
 from datetime import timedelta
 from TwitterQuerier import TwitterQuerier
+from TwitterLearningMachine import TwitterLearningMachine
 
 class AnalyzingHandler:
     #start __init__
-    #def __init__(self):  // Remove if ctor is necessary
+    def __init__(self):
+      self.TwitterLM = TwitterLearningMachine('data/sampleTweets.csv')
     #end
 
     def analyzeTweets(self, keyword, location=None, until=None):
@@ -19,11 +21,18 @@ class AnalyzingHandler:
       tweets = querier.getTweets(keyword, location=location)
 
       # TODO: Call learning machine
+      results = results = {'positive':0, 'negative':0, 'neutral':0}
+
+      if len(tweets) > 0:
+        for tweet in tweets:
+          sentiment = self.TwitterLM.classify(tweet)
+          results[sentiment] = results[sentiment] + 1
+
+        # Normalizing the results:
+        for key in results:
+          results[key] = (results[key] * 100) / len(tweets)
 
       # TODO: Create a streamer that gets tweets and saves the to the database
-
-      # IMPORTANT: THIS IS A PLACEHOLDER! REPLACE WITH ACTUAL RESULTS!
-      results = {'positive':33, 'negative':33, 'neutral':33}
 
       return results;
 
@@ -34,4 +43,4 @@ class AnalyzingHandler:
 # Test Entry point
 #analyzer = AnalyzingHandler()
 
-#print analyzer.analyzeTweets('love', location='United States')
+#print analyzer.analyzeTweets('Beyonce', location='United States')
