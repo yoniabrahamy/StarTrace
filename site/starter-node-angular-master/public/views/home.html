@@ -1,0 +1,57 @@
+<div class="jumbotron">
+    <h1>Trace for a Star</h1>
+    <p class="lead">Choose a celebrity and location and after a short time we will display you the percentage of positive, negative and neutral opinions on the celebrity in the selected location.</p>
+     <p>
+     	<input class="span2" type="text" placeholder="Celebrity Full Name" ng-model="celebrity">
+ 		<input class="span2" type="text" placeholder="City" ng-model="city">
+ 	</p>
+    <a class="btn btn-large btn-success" href="" ng-click="getDataFromServer()">Go!</a>
+</div>
+
+<hr>
+
+<div class="jumbotron">
+	  <div class="card people">
+         <div class="card-top green">
+            <a href="#">
+               <img src="assets/img/silhouette_homer.png" alt="">
+            </a>
+         </div>
+         <div class="card-info">
+            <a class="title" href="#">Positive</a>
+            <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+         </div>
+         <div class="card-bottom">
+            <button class="btn btn-block">Follow</button>
+         </div>
+      </div>
+<div class="card people">
+                     <div class="card-top blue">
+                        <a href="#">
+                           <img src="assets/img/silhouette_bart.png" alt="">
+                        </a>
+                     </div>
+                     <div class="card-info">
+                        <a class="title" href="#">Neutral</a>
+                        <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                     </div>
+                     <div class="card-bottom">
+                        <button class="btn btn-block">Follow</button>
+                     </div>
+                  </div>
+<div class="card people">
+         <div class="card-top green">
+            <a href="#">
+               <img src="assets/img/silhouette_homer.png" alt="">
+            </a>
+         </div>
+         <div class="card-info">
+            <a class="title" href="#">Negative</a>
+            <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+         </div>
+         <div class="card-bottom">
+            <button class="btn btn-block">Follow</button>
+         </div>
+      </div>
+      
+</div>
