@@ -9,7 +9,6 @@ import os
 import pickle
 from datetime import timedelta
 from geopy.geocoders import GeoNames
-import oauth2
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRestPager
 
 class TwitterQuerier:
