@@ -10,4 +10,9 @@ module.exports = function(app) {
 		res.sendfile('./public/index.html');
 	});
 
+	app.post('Http://localhost:5000/learning/api/v1.0/analyzeTweets', 
+		function(req, res, next) {
+			
+	});
+
 };
