@@ -10,6 +10,8 @@ import pprint
 import numpy
 import classifier_helper
 from classifier_helper import *
+import pickle
+import os.path
 
 class TwitterLearningMachine:
     #start __init__
@@ -98,27 +100,34 @@ class TwitterLearningMachine:
     #end
 
     def initNBClassifier(self, learningDataset):
-      inpTweets = csv.reader(open(learningDataset, 'rb'), delimiter=',', quotechar='"')
-      count = 0;
-      tweets = []
-      for row in inpTweets:
-          sentiment = row[0]
-          tweet = row[1]
-          processedTweet = self.processTweet(tweet)
-          featureVector = self.getFeatureVector(processedTweet, self.stopWords)
-          self.featureList.extend(featureVector)
-          tweets.append((featureVector, sentiment));
-      #end loop
+      if os.path.isfile("NBClassifier.p"):
+        self.NBClassifier = pickle.load(open( "NBClassifier.p", "rb" ) )
+        print "Used ready!"
+      else:
+        inpTweets = csv.reader(open(learningDataset, 'rb'), delimiter=',', quotechar='"')
+        count = 0;
+        tweets = []
+        for row in inpTweets:
+            sentiment = row[0]
+            tweet = row[1]
+            processedTweet = self.processTweet(tweet)
+            featureVector = self.getFeatureVector(processedTweet, self.stopWords)
+            self.featureList.extend(featureVector)
+            tweets.append((featureVector, sentiment));
+        #end loop
 
-      # Remove featureList duplicates
-      self.featureList = list(set(self.featureList))
+        # Remove featureList duplicates
+        self.featureList = list(set(self.featureList))
 
-      # Generate the training set
-      training_set = nltk.classify.util.apply_features(self.extract_features, tweets)
+        # Generate the training set
+        training_set = nltk.classify.util.apply_features(self.extract_features, tweets)
 
-      # Train the Naive Bayes classifier
-      self.NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
+        # Train the Naive Bayes classifier
+        self.NBClassifier = nltk.NaiveBayesClassifier.train(training_set)
 
+        # Saving the classifier
+        pickle.dump(self.NBClassifier, open("NBClassifier.p", "wb"))
+        print "Made A new one!"
     def classify(self, tweet):
       processedTweet = self.processTweet(tweet);
       sentiment = self.NBClassifier.classify(self.extract_features(self.getFeatureVector(processedTweet, self.stopWords)))
@@ -127,7 +136,7 @@ class TwitterLearningMachine:
 #end class
 
 # Test area for learning machine
-#LM = TwitterLearningMachine('data/sampleTweets.csv')
+#LM = TwitterLearningMachine('data/medium_size_dataset.csv')
 
 #tweet = 'Bananas'
 #print LM.classify(tweet)
