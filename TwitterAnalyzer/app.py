@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, abort
 from AnalyzingHandler import AnalyzingHandler
+from ImageRetriever import ImageRetriever
 
 app = Flask(__name__)
 handler = handler = AnalyzingHandler()
@@ -18,7 +19,16 @@ def analyzeTweets():
 
 	print "passed extraction"
 
-	return jsonify(handler.analyzeTweets(keyword, location=location)), 201
+	results = handler.analyzeTweets(keyword, location=location)
+
+	imgRet = ImageRetriever()
+
+	results['keywordImages'] = imgRet.retreiveImage(keyword)
+	results['locationImages'] = imgRet.retreiveImage(location)
+
+	print results
+
+	return jsonify(results), 201
 #end
 
 #def index():
