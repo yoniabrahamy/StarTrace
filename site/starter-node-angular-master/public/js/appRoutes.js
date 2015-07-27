@@ -9,5 +9,17 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider',
 	        url: "/home",
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
-	    });
+	    })
+
+	    .state('about', {
+	        url: "/about",
+			templateUrl: 'views/about.html'
+			//controller: 'MController'
+	    })
+
+	    .state('contact', {
+	        url: "/contact",
+			templateUrl: 'views/contact.html'
+			//controller: 'MController'
+	    })
 }]);

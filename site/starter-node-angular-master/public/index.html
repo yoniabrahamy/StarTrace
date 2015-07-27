@@ -54,7 +54,9 @@
       .marketing p + h4 {
         margin-top: 28px;
       }
+
       </style>
+
       <link href="vendors/bootplus/css/bootplus-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -76,9 +78,9 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li class="active"><a ui-sref="home">Home</a></li>
+          <li><a ui-sref="about">About</a></li>
+          <li><a ui-sref="contact">Contact</a></li>
         </ul>
         <h3 class="muted">Star Trace</h3>
       </div>
@@ -89,7 +91,7 @@
       <hr>
 
       <div class="footer">
-        <p>&copy; Amit Weil, Johnatan Abrahami, Gal Ben Yair and Neta Li Lahat 2015</p>
+        <p>&copy; Johnatan Abrahamy, Amit Weil, Gal Ben Yair and Neta Li Lahat 2015</p>
       </div>
 
     </div> <!-- /container -->
@@ -124,5 +126,11 @@
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 
+    <!--Graphs -->
+    <script src="vendors/nvd3/d3.js"></script>
+    <script src="vendors/nvd3/d3.min.js"></script>
+    <script src="vendors/nvd3/nv.d3.css"></script>
+    <script src="vendors/nvd3/nv.d3.min.css"></script>
+    <script src="vendors/nvd3/nv.d3.min.js"></script>
    </body>
 </html>
